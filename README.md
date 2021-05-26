@@ -1,4 +1,5 @@
 # ICD-9 to ICD-10 Crosswalk (Conversion, Mapping)
+
 Performs crosswalk mapping to and from ICD-9 to ICD-10.  
 
 ##Background
@@ -67,9 +68,13 @@ into pick lists.
 V5877  
 73025  
 
-##Sources:
+## Sample Data
+Sample ICD-9 CM and PCS files are included.
+
+##Resources:
 https://www.cms.gov/Medicare/Coding/ICD10/2018-ICD-10-PCS-and-GEMs
 https://www.cms.gov/Medicare/Coding/ICD10/2018-ICD-10-CM-and-GEMs
 https://github.com/Ed-Nonnenmacher/ICD9-ICD10.git
 https://github.com/bhanratt/ICD9CMtoICD10CM.git
-Last Accessed: 5/25/2017
+
+
