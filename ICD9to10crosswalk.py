@@ -52,7 +52,7 @@ class ICD_CM_Conversion:
     def icd9_to_10_cm(self, los):
         """
         Forward match from I9 GEMS to I10 GEMS
-        :param los:
+        :param los: list of codes
         :return: dtype(dict)
         """
         a = dict()
@@ -68,8 +68,8 @@ class ICD_CM_Conversion:
 
     def icd10_to_9_cm(self, list_of_codes):
         """
-        Backward matchfrom I10 GEMs to I9 GEMS
-        :param list_of_codes:
+        Backward match from I10 GEMs to I9 GEMS
+        :param list_of_codes: list of codes
         :return: dtype(dict)
         """
         a = dict()
@@ -85,7 +85,7 @@ class ICD_CM_Conversion:
     def fwb_cm(self, list_of_codes):
         """
         Combined result of forward and backward matching
-        :param list_of_codes:
+        :param list_of_codes: list of codes
         :return: dtype(dict)
         """
         f = self.icd9_to_10_cm(list_of_codes)
@@ -97,7 +97,7 @@ class ICD_CM_Conversion:
         Secondary matching, where secondary ICD9 codes are identified, and provided a forward backward match as well.
         Seconary ICD9 codes are identified as other ICD9 codes that share ICD-10 codes, either through forward or
         backward matching.
-        :param list_of_codes: source code file
+        :param list_of_codes: list of codes
         :return: dtype(dict)
         """
         fwb_1 = self.fwb_cm(list_of_codes)
@@ -151,7 +151,7 @@ class ICD_PCS_Conversion:
     def icd9_to_10_pcs(self, los):
         """
         Forward match from I9 GEMS to I10 GEMS
-        :param los:
+        :param los: list of codes
         :return: dtype(dict)
         """
         a = dict()
@@ -167,8 +167,8 @@ class ICD_PCS_Conversion:
 
     def icd10_to_9_pcs(self, list_of_codes):
         """
-        Backward matchfrom I10 GEMs to I9 GEMS
-        :param list_of_codes:
+        Backward match from I10 GEMs to I9 GEMS
+        :param list_of_codes: list of codes
         :return: dtype(dict)
         """
         a = dict()
@@ -184,7 +184,7 @@ class ICD_PCS_Conversion:
     def fwb_pcs(self, list_of_codes):
         """
         Combined result of forward and backward matching
-        :param list_of_codes:
+        :param list_of_codes: list of codes
         :return: dtype(dict)
         """
         f = self.icd9_to_10_pcs(list_of_codes)
@@ -255,8 +255,8 @@ def process_file(data_file, gem_type):
 
 def main():
     print('Start mapping...')
-    read_files(r'C:\Users\cjclark\Dropbox\Apps\FunctionLab\DECADES\ICD-9-cm_source', gem_type='cm')
-    read_files(r'C:\Users\cjclark\Dropbox\Apps\FunctionLab\DECADES\ICD-9-pcs_source', gem_type='pcs')
+    read_files(r'ICD-9-cm_source', gem_type='cm')
+    read_files(r'ICD-9-pcs_source', gem_type='pcs')
 
 
 if __name__ == '__main__':
