@@ -72,9 +72,9 @@ V5877
 Sample ICD-9 CM and PCS files are included.
 
 ## Resources:
-https://www.cms.gov/Medicare/Coding/ICD10/2018-ICD-10-PCS-and-GEMs
-https://www.cms.gov/Medicare/Coding/ICD10/2018-ICD-10-CM-and-GEMs
-https://github.com/Ed-Nonnenmacher/ICD9-ICD10.git
+https://www.cms.gov/Medicare/Coding/ICD10/2018-ICD-10-PCS-and-GEMs \
+https://www.cms.gov/Medicare/Coding/ICD10/2018-ICD-10-CM-and-GEMs \
+https://github.com/Ed-Nonnenmacher/ICD9-ICD10.git \
 https://github.com/bhanratt/ICD9CMtoICD10CM.git
 
 
