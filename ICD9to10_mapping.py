@@ -6,10 +6,10 @@ import datetime
 
 
 # ICD9 and ICD10 GEMS .txt files
-i9_cm_source_path = r'gem_files\2018_I9_cm_gem.txt'
-i10_cm_source_path = r'gem_files\2018_I10_cm_gem.txt'
-i9_pcs_source_path = r'gem_files\2018_I9_pcs_gem.txt'
-i10_pcs_source_path = r'gem_files\2018_I10_pcs_gem.txt'
+i9_cm_source_path = r'gem_files\2018\2018_I9_cm_gem.txt'
+i10_cm_source_path = r'gem_files\2018\2018_I10_cm_gem.txt'
+i9_pcs_source_path = r'gem_files\2018\2018_I9_pcs_gem.txt'
+i10_pcs_source_path = r'gem_files\2018\2018_I10_pcs_gem.txt'
 
 
 class ICD_CM_Conversion:

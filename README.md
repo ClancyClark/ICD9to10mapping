@@ -1,10 +1,9 @@
-# ICD-9 to ICD-10 Crosswalk
+# ICD-9 to ICD-10 Mapping
 
-Performs crosswalk mapping to and from ICD-9 to ICD-10.  
+Performs  mapping to and from ICD-9 to ICD-10.  
 
 ## Background
-Crosswalk is based on CMS general equivalence mappings (GEMs).
-Diagnosis (CM) and procedure (PCS) codes are mapped.
+Diagnosis (CM) and procedure (PCS) codes is based on CMS general equivalence mappings (GEMs).
 
 The purpose of the GEMs is to create a useful, practical, 
 code to code translation reference dictionary for both code 
