@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import os
 import re
@@ -31,7 +32,8 @@ class ICD_CM_Conversion:
         reg = re.compile(r'(\w*) +(\w*) +(\w*)')
         with open(path) as file:
             reader = csv.reader(file)
-            return pd.DataFrame([list(reg.search(str(i)).groups()) for i in reader], columns=cols)
+            cm_df = pd.DataFrame([list(reg.search(str(i)).groups()) for i in reader], columns=cols)
+            return cm_df
 
     def dict_append(self, base, new):
         """
@@ -58,12 +60,7 @@ class ICD_CM_Conversion:
         a = dict()
 
         for i in los:
-            if i in a.keys():
-                a[i].extend(self.df9_cm[self.df9_cm['I9']==i]['I10'].values)
-                a[i] = list(set(a[i]))
-                continue
-            else:
-                a[i] = list(self.df9_cm[self.df9_cm['I9']==i]['I10'].values)
+            a[i] = list(self.df9_cm[self.df9_cm['I9']==i][['I10', 'FLAG']].values)
         return a
 
     def icd10_to_9_cm(self, list_of_codes):
@@ -75,11 +72,7 @@ class ICD_CM_Conversion:
         a = dict()
 
         for i in list_of_codes:
-            if i in a.keys():
-                a[i].extend(list(self.df10_cm[self.df10_cm['I9']==i]['I10'].values))
-                a[i] = list(set(a[i]))
-            else:
-                a[i] = list(self.df10_cm[self.df10_cm['I9']==i]['I10'].values)
+            a[i] = list(self.df10_cm[self.df10_cm['I10']==i][['I9', 'FLAG']].values)
         return a
 
     def fwb_cm(self, list_of_codes):
@@ -130,7 +123,8 @@ class ICD_PCS_Conversion:
         reg = re.compile(r'(\w*) +(\w*) +(\w*)')
         with open(path) as file:
             reader = csv.reader(file)
-            return pd.DataFrame([list(reg.search(str(i)).groups()) for i in reader], columns=cols)
+            pcs_df = pd.DataFrame([list(reg.search(str(i)).groups()) for i in reader], columns=cols)
+            return pcs_df
 
     def dict_append(self, base, new):
         """
@@ -157,12 +151,7 @@ class ICD_PCS_Conversion:
         a = dict()
 
         for i in los:
-            if i in a.keys():
-                a[i].extend(self.df9_pcs[self.df9_pcs['I9']==i]['I10'].values)
-                a[i] = list(set(a[i]))
-                continue
-            else:
-                a[i] = list(self.df9_pcs[self.df9_pcs['I9']==i]['I10'].values)
+            a[i] = list(self.df9_pcs[self.df9_pcs['I9']==i][['I10', 'FLAG']].values)
         return a
 
     def icd10_to_9_pcs(self, list_of_codes):
@@ -174,11 +163,7 @@ class ICD_PCS_Conversion:
         a = dict()
 
         for i in list_of_codes:
-            if i in a.keys():
-                a[i].extend(list(self.df10_pcs[self.df10_pcs['I9']==i]['I10'].values))
-                a[i] = list(set(a[i]))
-            else:
-                a[i] = list(self.df10_pcs[self.df10_pcs,['I9']==i]['I10'].values)
+            a[i] = list(self.df10_pcs[self.df10_pcs,['I10']==i][['I9', 'FLAG']].values)
         return a
 
     def fwb_pcs(self, list_of_codes):
@@ -233,6 +218,9 @@ def process_file(data_file, gem_type):
         stripped_line = line.strip()
         list_of_codes.append(stripped_line)
 
+    # remove duplicates
+    list_of_codes = list(set(list_of_codes))
+
     code_file.close()
 
     icd_cm_converter = ICD_CM_Conversion()
@@ -247,10 +235,19 @@ def process_file(data_file, gem_type):
         return expanded
 
     df = pd.DataFrame.from_dict(converted_data.items())
-    df.rename(columns={0: 'ICD9', 1: 'ICD10'}, inplace=True)
-    expanded_df = df.explode('ICD10')
+    df.rename(columns={0: 'ICD9', 1: 'ICD10-code_and_flag'}, inplace=True)
+    expanded_df = df.explode('ICD10-code_and_flag')
+    expanded_with_codes_df = expanded_df.dropna()
+    expanded_with_codes_df['ICD10'], expanded_with_codes_df['FLAG'] = zip(*expanded_with_codes_df.pop('ICD10-code_and_flag'))
 
-    return expanded_df
+    nan_codes_df = expanded_df[expanded_df['ICD10-code_and_flag'].isnull()]
+    nan_codes_df['ICD10'] = np.nan
+    nan_codes_df['FLAG'] = np.nan
+    nan_codes_df.drop(columns=['ICD10-code_and_flag'], inplace=True)
+
+    complete_df = expanded_with_codes_df.append(nan_codes_df)
+
+    return complete_df
 
 
 def main():

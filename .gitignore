@@ -102,3 +102,10 @@ __pycache__/
 /tests/
 /cicd_build.py
 
+# Large GEM files
+/gem_files/2014/
+/gem_files/2015/
+/gem_files/2016/
+/gem_files/2017/
+/gem_files/2018/
+/gem_files/
