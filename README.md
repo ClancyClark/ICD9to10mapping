@@ -2,7 +2,7 @@
 
 Performs  mapping to and from ICD-9 to ICD-10.  
 
-## Background
+## Background 
 Diagnosis (CM) and procedure (PCS) codes is based on CMS general equivalence mappings (GEMs).
 
 The purpose of the GEMs is to create a useful, practical, 
@@ -105,6 +105,12 @@ V5877
 
 ## Sample Data
 Sample ICD-9 CM and PCS files are included.
+
+## Credit 
+Above content adapted from CMS GEM Documentation and User Guides.  Please refer to
+https://www.cms.gov/Medicare/Coding/ICD10/Latest_News for additional details.  To learn more 
+about the development of the GEM, I recommend reviewing the ICD MS-DRG Conversion Project 
+information at https://www.cms.gov/Medicare/Coding/ICD10/ICD-10-MS-DRG-Conversion-Project.
 
 ## Resources:
 https://www.cms.gov/Medicare/Coding/ICD10/2018-ICD-10-PCS-and-GEMs \
